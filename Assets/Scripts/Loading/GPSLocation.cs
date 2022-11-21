@@ -83,7 +83,7 @@ public class GPSLocation : MonoBehaviour
                 LocalMapData localMapData = gameObject.GetComponent<LocalMapData>();
                 localMapData.DataDownload(Input.location.lastData.latitude, Input.location.lastData.longitude);
                 
-                Input.location.Stop();
+                //Input.location.Stop();
 
             } 
             else 

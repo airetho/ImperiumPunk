@@ -13,8 +13,8 @@ public class MapReader : MonoBehaviour
 
     Dictionary<ulong, OsmNode> nodes;
     List<OsmWay> ways;
-    OsmBounds bounds; 
-
+    OsmBounds bounds;
+    public static Vector3 Centre;
      
 
     [Tooltip("The resource file that contains the OSM map data.")]
@@ -117,5 +117,6 @@ public class MapReader : MonoBehaviour
     void SetBounds (XmlNode xmlNode)
     {
         bounds = new OsmBounds(xmlNode);
+        Centre = bounds.Centre;
     }
 }
