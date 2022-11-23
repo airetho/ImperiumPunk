@@ -1,6 +1,6 @@
 using System;
 
-public static class MercatorProjection
+public static class mercator_projection
 {
     private static readonly double R_MAJOR = 6378137.0;
     private static readonly double R_MINOR = 6356752.3142;
