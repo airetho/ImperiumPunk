@@ -19,6 +19,8 @@ class map_reader : MonoBehaviour
     [Tooltip("The resource file that contains the OSM map data.")]
     public string resource_file;
 
+    public static Vector3 centre;
+
     public bool is_ready {get; private set;}
 
 
@@ -116,5 +118,6 @@ class map_reader : MonoBehaviour
     void SetBounds (XmlNode xml_node)
     {
         bounds = new osm_bounds(xml_node);
+        centre = bounds.centre;
     }
 }
