@@ -18,9 +18,9 @@ public class BoxScript : MonoBehaviour
 
     void UpdateLocation()
     {
-        Vector3 Centre = MapReader.Centre;
-        float x = (float) (Centre.x - MercatorProjection.lonToX(Input.location.lastData.longitude));
-        float y = (float) (Centre.z - MercatorProjection.latToY(Input.location.lastData.latitude));
+        Vector3 centre = map_reader.centre;
+        float x = (float) (centre.x - mercator_projection.lonToX(Input.location.lastData.longitude));
+        float y = (float) (centre.z - mercator_projection.latToY(Input.location.lastData.latitude));
         Debug.Log("coords = " + x + ", " + y);
         transform.position = new Vector3(x,0,y);
     }
