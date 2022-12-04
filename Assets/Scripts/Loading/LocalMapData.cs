@@ -50,7 +50,7 @@ public class LocalMapData : MonoBehaviour
     private IEnumerator DownloadFile(string url)
     {
         var uwr = new UnityWebRequest(url, UnityWebRequest.kHttpVerbGET);
-        string path = Path.Combine(Application.persistentDataPath, "localdata.txt");
+        string path = Path.Combine(Application.persistentDataPath, "local_data.txt");
         uwr.downloadHandler = new DownloadHandlerFile(path);
         yield return uwr.SendWebRequest();
         if (uwr.result != UnityWebRequest.Result.Success)

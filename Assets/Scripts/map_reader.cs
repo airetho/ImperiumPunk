@@ -46,7 +46,7 @@ class map_reader : MonoBehaviour
                 //Save File In Resource Path
                 resource_file = file.ToString();
             }
-        }
+        
 
         nodes = new Dictionary<ulong, osm_node>();
         ways = new List<osm_way>();
@@ -63,6 +63,10 @@ class map_reader : MonoBehaviour
         get_ways(doc.SelectNodes("/osm/way"));
 
         is_ready = true;
+
+        } else {
+            Debug.Log("Failed to Load.");
+        }
     }
 
 
