@@ -26,8 +26,9 @@ public class player_location : MonoBehaviour
         } 
 
 
-        float x = (float) (centre.x - mercator_projection.lonToX(Input.location.lastData.longitude));
-        float y = (float) (centre.z - mercator_projection.latToY(Input.location.lastData.latitude));
+        float x = (float) (mercator_projection.lonToX(Input.location.lastData.longitude - centre.x));
+        float y = (float) (mercator_projection.latToY(Input.location.lastData.latitude - centre.z));
+        
         Debug.Log("coords = " + x + ", " + y);
         transform.position = new Vector3(x,0,y);
     }
