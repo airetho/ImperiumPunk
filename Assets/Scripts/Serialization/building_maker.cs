@@ -59,8 +59,8 @@ class building_maker : infrastructure_behaviour
                 //Allows for Sprites on Roads
                 uvs.Add(new Vector2(0,0));
                 uvs.Add(new Vector2(1,0));
-                uvs.Add(new Vector3(0,1));
-                uvs.Add(new Vector3(1,1));
+                uvs.Add(new Vector2(0,1));
+                uvs.Add(new Vector2(1,1));
 
 
 

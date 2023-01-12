@@ -28,8 +28,8 @@ public class player_location : MonoBehaviour
 
         float x = (float) (mercator_projection.lonToX(Input.location.lastData.longitude) - centre.x);
         float y = (float) (mercator_projection.latToY(Input.location.lastData.latitude) - centre.z);
-        
         Debug.Log("coords = " + x + ", " + y);
+        Debug.Log("gps coords = " + Input.location.lastData.longitude + ", " + Input.location.lastData.latitude);
         transform.position = new Vector3(x,0,y);
     }
 }

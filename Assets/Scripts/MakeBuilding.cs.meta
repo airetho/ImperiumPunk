@@ -1,0 +1,12 @@
+fileFormatVersion: 2
+guid: dca0c7432d2ba6746b88e6e38fe68ad3
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - coal_building: {fileID: 188050, guid: b06f0e6c1dfa4356ac918da1bb32c603, type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

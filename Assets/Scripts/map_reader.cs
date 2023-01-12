@@ -94,6 +94,9 @@ class map_reader : MonoBehaviour
                     Vector3 v1 = p1 - bounds.centre;
                     Vector3 v2 = p2 - bounds.centre;
 
+                    //Vector3 v1 = new Vector3(p1.x - bounds.centre[0], 0, p1.z - bounds.centre[2]);
+                    //Vector3 v2 = new Vector3(p2.x - bounds.centre[0], 0, p2.z - bounds.centre[2]);
+
                     Debug.DrawLine(v1, v2, color);
                 }
             }

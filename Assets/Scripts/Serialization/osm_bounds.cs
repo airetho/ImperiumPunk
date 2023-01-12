@@ -6,6 +6,7 @@ using System.Xml;
 class osm_bounds : base_osm
 {
     public Vector3 centre { get; private set; }
+    //public double[] centre { get; private set; }
 
     public float min_lat { get; private set; }
     public float max_lat { get; private set; }
@@ -27,6 +28,7 @@ class osm_bounds : base_osm
 
         //Find Centre
         centre = new Vector3(x, 0 , y);
+        //centre = new { x, 0, y };
     }
     
 }
