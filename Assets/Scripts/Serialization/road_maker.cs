@@ -5,6 +5,8 @@ using System.Collections.Generic;
 class road_maker : infrastructure_behaviour
 {
 
+    public static bool roads_built = false;
+
     public Material road_material;
     IEnumerator Start()
     {
@@ -93,5 +95,9 @@ class road_maker : infrastructure_behaviour
             yield return null;
 
         }
+
+        //Finished Roads
+        roads_built = true;
+        Debug.Log("Built Roads.");
     }
 }    
