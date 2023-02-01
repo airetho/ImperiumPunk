@@ -8,6 +8,7 @@ public class loading_fade : MonoBehaviour
 {
     private bool faded = false;
     public float duration = 0.4f;
+    public GameObject loading_canvas;
 
 
    
@@ -17,14 +18,12 @@ public class loading_fade : MonoBehaviour
         if (road_maker.roads_built & building_maker.buildings_built == true) {
             var canvas_group = GetComponent<CanvasGroup>();
             StartCoroutine(do_fade(canvas_group, canvas_group.alpha, 0));
-            faded = !faded;
         }
+
     }
 
     public IEnumerator do_fade(CanvasGroup canvas_group, float start, float end) 
     {
-
-        
 
         float counter = 0f;
 
@@ -32,11 +31,13 @@ public class loading_fade : MonoBehaviour
         {
             counter += Time.deltaTime;
             canvas_group.alpha = Mathf.Lerp(start, end, counter / duration);
-
+            faded = !faded;
             yield return null;
         }
 
-    }
-    
+        if (counter >= duration){
+            loading_canvas.SetActive(false);
+        }
+    }  
 }
 

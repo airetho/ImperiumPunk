@@ -3,39 +3,112 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-
 public class camera_movement : MonoBehaviour
 {
     [SerializeField] private Camera cam;
-    [SerializeField] private Transform target;
-    [SerializeField] private float distance_to_target = 10;
+    [SerializeField] public Transform player;
     
-    private Vector3 previous_position;
+    //all camera_states: "low" | "high" 
+    [SerializeField] public static string camera_state = "low";
     
+    public float distance_to_target;
+
+    //"low" swipe var's
+    private Vector2 previous_position; 
+    private GameObject camera_parent; 
+    public bool natural_motion = true; 
+    public float rotation_speed; 
+   
+
+    ///In game-lore the "camera" is a small Observation Ballon manned by only a few people.
+
+
+    void Start()
+    {   
+        
+
+        Transform originalParent = transform.parent;            //check if t$$anonymous$$s camera already has a parent
+        camera_parent = new GameObject ("camera");                //create a new gameObject
+        camera_parent.transform.position = player.position;        //place the new gameObject at pivotPoint location
+        transform.parent = camera_parent.transform;                    //make t$$anonymous$$s camera a c$$anonymous$$ld of the new gameObject
+        camera_parent.transform.parent = originalParent;            //make the new gameobject a c$$anonymous$$ld of the original camera parent if it had one
+        camera_dist();
+    }
+
+
     void Update()
     {
-        if (Input.GetMouseButtonDown(0))
+        switch (camera_state)
         {
-            previous_position = cam.ScreenToViewportPoint(Input.mousePosition);
+
+            //"low" or City View
+            case "low":
+                camera_dist();
+                swipe_control();
+            break;
+
+
+            //"high" or Empire View 
+            case "high":
+                swipe_control();           
+            break;
         }
-        else if (Input.GetMouseButton(0))
-        {
-            Vector3 new_position = cam.ScreenToViewportPoint(Input.mousePosition);
-            Vector3 direction = previous_position - new_position;
-            
-            float rotation_around_y_axis = -direction.x * 180; // camera moves horizontally
-            //float rotation_around_x_axis = direction.y * 180; // camera moves vertically
-            
-            cam.transform.position = target.position;
-            
-            //cam.transform.Rotate(new Vector3(1, 0, 0), rotationAroundXAxis);
-            cam.transform.Rotate(new Vector3(0, 1, 0), rotation_around_y_axis, Space.World); // <— This is what makes it work!
-            
-            int buffer_up = 20;
-            
-            cam.transform.Translate(new Vector3(0, buffer_up, - distance_to_target));
-            
-            previous_position = new_position;
-        }   
+
+    }
+
+    void camera_dist(){
+        cam.transform.position = player.position;
+        camera_parent.transform.position = player.position; 
+        int buffer_up = 20;          
+        cam.transform.Translate(new Vector3(0, buffer_up, - distance_to_target));
+    }
+
+    void swipe_control(){
+        
+        if (Input.touchCount > 0)
+                {
+                    foreach (Touch touch in Input.touches)
+                    {
+                        if (touch.phase == TouchPhase.Began && touch.fingerId == 0)
+                            {
+                                previous_position = touch.position;
+                            }
+                            if (touch.phase == TouchPhase.Moved || touch.phase == TouchPhase.Stationary)
+                            {
+                                if (touch.fingerId == 0)
+                                {
+                                    float x_difference = touch.position.x - previous_position.x;    //t$$anonymous$$s calculates the horizontal distance between the current finger location and the location last frame.
+                                    if (!natural_motion){x_difference *= -1;}
+                                    if (x_difference != 0){camera_parent.transform.Rotate (Vector3.up * x_difference * rotation_speed);}
+                                    previous_position = touch.position;
+                                }
+                            }
+                            if (touch.phase == TouchPhase.Ended && touch.fingerId == 0)
+                            {
+                                previous_position = touch.position;
+                            }
+                    }
+                }
+        
+                //MOUSE
+        
+                if (Input.GetMouseButtonDown(0))
+                {
+                    previous_position = Input.mousePosition;
+                }
+                if (Input.GetMouseButton(0))
+                {
+                    float x_difference = Input.mousePosition.x - previous_position.x;
+                    if(!natural_motion){x_difference *= -1;}
+                    if(x_difference != 0){camera_parent.transform.Rotate(Vector3.up * x_difference * rotation_speed);}
+                    previous_position = Input.mousePosition;
+                }
+                if (Input.GetMouseButtonUp (0))
+                {
+                    previous_position = Input.mousePosition;
+                }
     }
 }
+
+
+
