@@ -41,8 +41,6 @@ class map_reader : MonoBehaviour
 
             foreach (var file in d.GetFiles("*.txt"))
             {
-                Debug.Log(file);
-
                 //Save File In Resource Path
                 resource_file = file.ToString();
             }
@@ -52,8 +50,6 @@ class map_reader : MonoBehaviour
         ways = new List<osm_way>();
 
         var txt_asset = System.IO.File.ReadAllText(resource_file);
-        Debug.Log(txt_asset);
-    
 
         XmlDocument doc = new XmlDocument();
         doc.LoadXml(txt_asset);

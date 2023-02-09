@@ -4,7 +4,7 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.SceneManagement;
 
-public class SceneSwitcher : MonoBehaviour
+public class scene_switcher : MonoBehaviour
 {
     public void sceneForward()
     {
@@ -13,6 +13,7 @@ public class SceneSwitcher : MonoBehaviour
     }
     public void sceneBack()
     {
+        Debug.Log("Call Backward");
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
     }
 }
