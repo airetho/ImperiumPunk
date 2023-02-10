@@ -65,10 +65,33 @@ public class local_map_data : MonoBehaviour
         
     
         string path = Path.Combine(Application.persistentDataPath, "local_data.txt");
-        
-        //Creates a new instance and a file on disk where downloaded data will be written to. 
-        unity_web_request.downloadHandler = new DownloadHandlerFile(path);
 
+        if (File.Exists(@Application.persistentDataPath + "/local_data.txt")) {
+            
+            Debug.Log("File Exists");
+
+
+            //Deleting File
+            File.Delete(@Application.persistentDataPath + "/local_data.txt");
+
+            //Program must wait before attempting to create the file.
+            while(File.Exists(@Application.persistentDataPath + "/local_data.txt"))
+            {
+                System.Threading.Thread.Sleep(100);
+                Debug.Log("Sleep");
+            }
+            Debug.Log("File Deleted");
+                     
+            
+        } else {
+            Debug.Log("File Doesn't Exist");
+            //Does Nothing
+       
+        }
+
+        //Creates a new instance and a file on disk where downloaded data will be written to. 
+        Debug.Log("Creating File.");
+        unity_web_request.downloadHandler = new DownloadHandlerFile(path);
         yield return unity_web_request.SendWebRequest();
 
         
@@ -84,8 +107,6 @@ public class local_map_data : MonoBehaviour
 
             //Once Downloaded Load game_world
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
-        }
-            
-        
+        }       
     }
 }

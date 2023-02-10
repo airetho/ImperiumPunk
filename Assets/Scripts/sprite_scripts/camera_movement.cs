@@ -25,7 +25,6 @@ public class camera_movement : MonoBehaviour
 
     void Start()
     {   
-        
 
         Transform originalParent = transform.parent;            //check if t$$anonymous$$s camera already has a parent
         camera_parent = new GameObject ("camera");                //create a new gameObject
@@ -109,6 +108,3 @@ public class camera_movement : MonoBehaviour
                 }
     }
 }
-
-
-
