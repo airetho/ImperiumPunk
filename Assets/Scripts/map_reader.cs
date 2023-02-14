@@ -45,11 +45,12 @@ class map_reader : MonoBehaviour
                 resource_file = file.ToString();
             }
         
-
+        
         nodes = new Dictionary<ulong, osm_node>();
         ways = new List<osm_way>();
 
         var txt_asset = System.IO.File.ReadAllText(resource_file);
+         
 
         XmlDocument doc = new XmlDocument();
         doc.LoadXml(txt_asset);
