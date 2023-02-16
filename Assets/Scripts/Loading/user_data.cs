@@ -21,8 +21,8 @@ public class account //JSON File Template
 
 public class user_data : MonoBehaviour
 {
-    public TextMeshProUGUI  user_type;
-    public TextMeshProUGUI  log;
+    public TextMeshProUGUI user_type;
+    public TextMeshProUGUI log;
     public TextMeshProUGUI entered_user_name;
     public TextMeshProUGUI entered_empire_name;
     string user_save_data;
