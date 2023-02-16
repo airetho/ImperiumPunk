@@ -22,16 +22,14 @@ public class camera_movement : MonoBehaviour
 
     ///In game-lore the "camera" is a small Observation Ballon manned by only a few people.
 
-
     void Start()
     {   
-        
 
-        Transform originalParent = transform.parent;            //check if t$$anonymous$$s camera already has a parent
-        camera_parent = new GameObject ("camera");                //create a new gameObject
-        camera_parent.transform.position = player.position;        //place the new gameObject at pivotPoint location
-        transform.parent = camera_parent.transform;                    //make t$$anonymous$$s camera a c$$anonymous$$ld of the new gameObject
-        camera_parent.transform.parent = originalParent;            //make the new gameobject a c$$anonymous$$ld of the original camera parent if it had one
+        Transform originalParent = transform.parent;            
+        camera_parent = new GameObject ("camera");               
+        camera_parent.transform.position = player.position;       
+        transform.parent = camera_parent.transform;                   
+        camera_parent.transform.parent = originalParent;       
         camera_dist();
     }
 
@@ -109,6 +107,3 @@ public class camera_movement : MonoBehaviour
                 }
     }
 }
-
-
-
