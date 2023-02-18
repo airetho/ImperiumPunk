@@ -40,7 +40,6 @@ class road_maker : infrastructure_behaviour
             Vector3 last_v1 = Vector3.up;
             Vector3 last_v2 = Vector3.up;
 
-            //doesn't work for 1-segment roads
             for (int i = 1; i < way.node_ids.Count; i++)
             {
                 //gets the start and end points of a linear section
