@@ -75,7 +75,7 @@ public class gps_location : MonoBehaviour
             gps_status.text = "Inovke Function";
 
             //Invoke GPS Location Data every sixty seconds. With a zero second initial delay. 
-            InvokeRepeating("updating_gps_data", 2f, 1f);
+            InvokeRepeating("updating_gps_data", 0.6f, 0.15f);
         }
 
     }

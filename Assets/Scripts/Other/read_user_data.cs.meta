@@ -1,10 +1,9 @@
 fileFormatVersion: 2
-guid: dded16f20497dd94ebccd580071eb56a
+guid: 05972010f6152b547b1782eb1656f0f9
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences:
-  - coal_building: {instanceID: 0}
+  defaultReferences: []
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

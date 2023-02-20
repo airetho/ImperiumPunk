@@ -41,8 +41,8 @@ public class camera_movement : MonoBehaviour
 
             //"low" or City View
             case "low":
-                camera_dist();
                 swipe_control();
+                camera_dist();
             break;
 
 

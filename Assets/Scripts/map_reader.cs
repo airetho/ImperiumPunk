@@ -20,6 +20,7 @@ class map_reader : MonoBehaviour
     public string resource_file;
 
     public static Vector3 centre;
+    public static bool centre_found = false;
 
     public bool is_ready {get; private set;}
 

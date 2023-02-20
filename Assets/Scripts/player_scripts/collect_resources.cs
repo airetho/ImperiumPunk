@@ -6,11 +6,15 @@ using TMPro;
 public class collect_resources : MonoBehaviour
 {
     public float sphere_radius;
-    public TextMeshProUGUI  coal_ui;
-    static public int coal_stored;
-
     public float countdown_start = 2;
     public float countdown = 2; 
+
+    //Resources
+    public TextMeshProUGUI  coal_ui;
+    static public int coal_stored;
+    public TextMeshProUGUI  pawn_ui;
+    static public int pawns_stored;
+
 
 
 
@@ -28,7 +32,6 @@ public class collect_resources : MonoBehaviour
     void resource_collecting() {
         
         Vector3 center = new Vector3(transform.position.x, 0.1f, transform.position.z);
-        Debug.Log(center);
 
         Collider[] hitColliders = Physics.OverlapSphere(center, sphere_radius);
         foreach (var hitCollider in hitColliders)
@@ -36,14 +39,20 @@ public class collect_resources : MonoBehaviour
             resource_generation  cs = hitCollider.gameObject.GetComponent<resource_generation>();
             if (cs.current_resource > 0)
             {
-                coal_stored += 1;
-                cs.current_resource -= 1;
-                coal_ui.text = coal_stored.ToString();
+                switch (cs.resource_type)
+                {
+                    case "coal":
+                        coal_stored += 1;
+                        cs.current_resource -= 1;
+                        coal_ui.text = coal_stored.ToString();
+                        break;
+                    case "pawn":
+                        pawns_stored += 1;
+                        cs.current_resource -= 1;
+                        pawn_ui.text = pawns_stored.ToString();
+                        break;
+                }
             }
-
-            Debug.Log(hitCollider.gameObject);
-           
         }
-
     }
 }

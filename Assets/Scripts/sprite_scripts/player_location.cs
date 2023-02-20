@@ -31,11 +31,10 @@ public class player_location : MonoBehaviour
         
         //(-9932481.00, 0.00, 4512401.00) <- #If centre is undefined. --- Debug.Log("centre: " + centre); --- Debug.Log("coords = " + x + ", " + y);
 
-
+        float z = (float) (mercator_projection.latToY(Input.location.lastData.latitude) - centre.z);
         float x = (float) (mercator_projection.lonToX(Input.location.lastData.longitude) - centre.x);
-        float y = (float) (mercator_projection.latToY(Input.location.lastData.latitude) - centre.z);
         
         
-        transform.position = new Vector3(x,0,y);
+        transform.position = new Vector3(x,0,z);
     }
 }

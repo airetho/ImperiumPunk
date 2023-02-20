@@ -11,10 +11,22 @@ using UnityEngine.SceneManagement;
 
 
 
+
+public class building_obj 
+{
+    public string building_type { get; set; }
+    public float latitude { get; set; }
+    public float longitude { get; set; }
+}
+
 public class account //JSON File Template
 {
     public string user_name { get; set; }
     public string user_empire { get; set; }
+    public int user_level { get; set; }
+    public int buildings { get; set; }
+    public List<building_obj> building_obj { get; set; }
+    
 }
 
 
@@ -49,7 +61,6 @@ public class user_data : MonoBehaviour
             log.text = "Reading File";
 
             //Read from File
-            JObject user_data = JObject.Parse(File.ReadAllText(@user_save_data));
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
 
         } else { // New User 
@@ -59,21 +70,44 @@ public class user_data : MonoBehaviour
     }
 
     public void submit_data(){
-         //New Account
-            account account = new account
+            
+
+        var object_to_serialize = new account();
+
+        object_to_serialize = new account{
+            user_name = entered_user_name.text,
+            user_empire = entered_empire_name.text,
+            user_level = 1,
+            buildings = 1,
+        };
+        
+        object_to_serialize.building_obj = new List<building_obj>
+        {
+            new building_obj 
             {
-                user_name = entered_user_name.text,
-                user_empire = entered_empire_name.text
-            };
-            
-            var account_string = Newtonsoft.Json.JsonConvert.SerializeObject(account); //Serialize Object
-            JObject user_data = JObject.Parse(account_string);
+                building_type = "coal_mine",
+                latitude = 37.710640F,
+                longitude = -89.224582F,
+            },
 
-            //string user_name = (string)user_data["user_name"]; Debug.Log(user_name);
-            //string empire_name = (string)user_data["user_empire"]; Debug.Log(empire_name);
+             new building_obj 
+            {
+                building_type = "coal_mine",
+                latitude = 37.710018F,
+                longitude = -89.223252F,
+            }
+        };
+
+        user_save_data = Application.persistentDataPath + "/user_data.json"; //Just to make sure user_save_data has been initialized.
             
-            System.IO.File.WriteAllText(user_save_data, account_string);
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        var account_string = Newtonsoft.Json.JsonConvert.SerializeObject(object_to_serialize); //Serialize Object
+            
+
+        //string user_name = (string)user_data["user_name"]; Debug.Log(user_name);
+        //string empire_name = (string)user_data["user_empire"]; Debug.Log(empire_name);
+            
+        System.IO.File.WriteAllText(user_save_data, account_string);
+
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
-
 }

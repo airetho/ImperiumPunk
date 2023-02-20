@@ -15,7 +15,7 @@ public class loading_fade : MonoBehaviour
    
     public void Update() {
         
-        if (building_maker.buildings_built = true && loading_bar_fill.fillAmount < 0.9f){
+        if (building_maker.buildings_built == true && loading_bar_fill.fillAmount < 0.9f){
             
             loading_bar_fill.fillAmount += 0.0025f;
 

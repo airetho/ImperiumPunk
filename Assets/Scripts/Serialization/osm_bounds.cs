@@ -27,6 +27,7 @@ class osm_bounds : base_osm
 
         //Find Centre
         centre = new Vector3(x, 0 , y);
+        map_reader.centre_found = true;
     }
     
 }

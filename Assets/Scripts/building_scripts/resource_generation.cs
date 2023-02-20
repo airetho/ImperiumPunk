@@ -8,6 +8,7 @@ public class resource_generation : MonoBehaviour
 
     public int max_resource = 3;
     public int current_resource = 1;
+    public string resource_type;
 
     public float max_time = 65; 
     public float current_time = 65; 
