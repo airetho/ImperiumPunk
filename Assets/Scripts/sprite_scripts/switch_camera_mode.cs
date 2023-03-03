@@ -6,7 +6,6 @@ using UnityEngine.UI;
 public class switch_camera_mode : MonoBehaviour
 {
     public Transform main_camera;
-    public GameObject player;
 
     // Start is called before the first frame update
     public void switching_camera_mode()
@@ -25,7 +24,4 @@ public class switch_camera_mode : MonoBehaviour
             
         } 
     }
-}
-
-                
-                
+}        

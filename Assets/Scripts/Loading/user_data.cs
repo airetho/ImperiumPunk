@@ -22,9 +22,16 @@ public class building_obj
 public class account //JSON File Template
 {
     public string user_name { get; set; }
-    public string user_empire { get; set; }
+    public string empire_name { get; set; }
+    public string capital_name { get; set; }
     public int user_level { get; set; }
     public int buildings { get; set; }
+    public int pawns { get; set; }
+    public int food { get; set; }
+    public int coal { get; set; }
+    public int gears { get; set; }
+
+
     public List<building_obj> building_obj { get; set; }
     
 }
@@ -33,39 +40,32 @@ public class account //JSON File Template
 
 public class user_data : MonoBehaviour
 {
-    public TextMeshProUGUI  user_type;
-    public TextMeshProUGUI  log;
     public TextMeshProUGUI entered_user_name;
     public TextMeshProUGUI entered_empire_name;
+    public TextMeshProUGUI entered_capital_name;
     string user_save_data;
 
 
     //Check for User Data
     void Awake()
     {
-        log.text = "Initializing";
         user_save_data = Application.persistentDataPath + "/user_data.json";
-        read_file();
+        read_file(); //Check if data already exists.
     }
     
     
     void read_file()
     {   
 
-        log.text = "Checking File";
-
         // Does the file exist?  
         if (File.Exists(@user_save_data)) // Old User
         {
-            user_type.text = "Returning User";
-            log.text = "Reading File";
-
             //Read from File
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
 
         } else { // New User 
-            user_type.text = "New User";
-            log.text = "Initializing New User";
+
+            //Do Nothing
         }
     }
 
@@ -76,13 +76,19 @@ public class user_data : MonoBehaviour
 
         object_to_serialize = new account{
             user_name = entered_user_name.text,
-            user_empire = entered_empire_name.text,
+            empire_name = entered_empire_name.text,
+            capital_name = entered_capital_name.text,
+            pawns = 100000000,
+            food = 100000000,
+            coal = 100000000,
+            gears = 100000000,
             user_level = 1,
             buildings = 1,
         };
         
         object_to_serialize.building_obj = new List<building_obj>
         {
+            /* No Initial Buildings
             new building_obj 
             {
                 building_type = "coal_mine",
@@ -96,6 +102,7 @@ public class user_data : MonoBehaviour
                 latitude = 37.710018F,
                 longitude = -89.223252F,
             }
+            */
         };
 
         user_save_data = Application.persistentDataPath + "/user_data.json"; //Just to make sure user_save_data has been initialized.

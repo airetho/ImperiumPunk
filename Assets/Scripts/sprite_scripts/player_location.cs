@@ -35,6 +35,6 @@ public class player_location : MonoBehaviour
         float x = (float) (mercator_projection.lonToX(Input.location.lastData.longitude) - centre.x);
         
         
-        transform.position = new Vector3(x,0,z);
+        transform.position = new Vector3(x,0.3f,z);
     }
 }

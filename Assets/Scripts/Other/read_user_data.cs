@@ -6,12 +6,12 @@ using TMPro;
 
 using System.IO; //Used for File Management
 using Newtonsoft.Json.Linq;
-using System.Text.Json;
 
 public class read_user_data : MonoBehaviour
 {
     public TextMeshProUGUI level_ui;
     public TextMeshProUGUI empire_name;
+    public TextMeshProUGUI capital_name;
 
     // Start is called before the first frame update
     void Start()
@@ -21,7 +21,17 @@ public class read_user_data : MonoBehaviour
 
 
         level_ui.text = (string)user_data["user_level"]; 
-        empire_name.text = (string)user_data["user_empire"]; 
+        empire_name.text = (string)user_data["empire_name"]; 
+        capital_name.text = (string)user_data["capital_name"]; 
+        
+        
+        //Set Stored Resources
+        collect_resources.pawns_stored = (int)user_data["pawns"];  
+        collect_resources.food_stored = (int)user_data["food"];  
+        collect_resources.coal_stored = (int)user_data["coal"];  
+        collect_resources.gears_stored = (int)user_data["gears"];  
+        
+        //Generate Buildings
         StartCoroutine(build_buildings(user_data));
     }
 
@@ -49,7 +59,7 @@ public class read_user_data : MonoBehaviour
                     float z = (float) (mercator_projection.latToY(latitude) - centre.z);
                     float x = (float) (mercator_projection.lonToX(longitude) - centre.x);
 
-                    Instantiate(GameObject.Find(building_type), new Vector3(x,0,z), transform.rotation);
+                    Instantiate(GameObject.Find(building_type), new Vector3(x,0.3f,z), transform.rotation);
                         
                 };
 

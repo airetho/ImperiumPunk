@@ -29,7 +29,7 @@ public class resource_generation : MonoBehaviour
             int minutes = (int)Mathf.Floor(ui_time / 60); 
             int hours = (int)Mathf.Floor(minutes / 60); 
 
-            timer.text = string.Format("{0:d2}:{1:d2}:{2:d2}", hours, minutes, seconds);
+            timer.text = string.Format("{0:d2}:{1:d2}:{2:d2}", hours, minutes % 60, seconds);
 
         } else if (current_resource <= max_resource) {
             current_resource += 1;

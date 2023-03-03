@@ -12,14 +12,18 @@ public class loading_fade : MonoBehaviour
     public Image loading_bar_fill;
 
 
-   
+   public void Start() {
+        loading_bar_fill.fillAmount = 0.3f;
+   }
+
+    //Loading Bar
     public void Update() {
         
         if (building_maker.buildings_built == true && loading_bar_fill.fillAmount < 0.9f){
             
             loading_bar_fill.fillAmount += 0.0025f;
 
-        } else if (loading_bar_fill.fillAmount < 0.3f) {
+        } else if (loading_bar_fill.fillAmount < 0.6f) {
             loading_bar_fill.fillAmount += 0.005f;
         }
 
@@ -50,4 +54,3 @@ public class loading_fade : MonoBehaviour
         }
     }  
 }
-

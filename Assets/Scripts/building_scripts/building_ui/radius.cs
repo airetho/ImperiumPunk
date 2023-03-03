@@ -37,7 +37,7 @@ public class radius : MonoBehaviour {
                 float x = radius_size * Mathf.Cos(theta);
                 float z = radius_size * Mathf.Sin(theta);
             
-                Vector3 pos = new Vector3(transform.position.x + x, 0.1f, transform.position.z + z); //Offset from world Origin
+                Vector3 pos = new Vector3(transform.position.x + x, 0.3f, transform.position.z + z); //Offset from world Origin
                 
                 lineRenderer.SetPosition(i, pos);
                 theta += deltaTheta;

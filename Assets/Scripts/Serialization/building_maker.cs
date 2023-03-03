@@ -50,10 +50,11 @@ class building_maker : infrastructure_behaviour
                 Vector3 v3 = s2 + cross;
                 Vector3 v4 = s2 - cross;
 
-                vectors.Add(v1);
-                vectors.Add(v2);
-                vectors.Add(v3);
-                vectors.Add(v4);
+
+                vectors.Add(v1 + new Vector3(0,0.2f,0));
+                vectors.Add(v2 + new Vector3(0,0.2f,0));
+                vectors.Add(v3 + new Vector3(0,0.2f,0));
+                vectors.Add(v4 + new Vector3(0,0.2f,0));
 
 
                 //Allows for Sprites on Roads
