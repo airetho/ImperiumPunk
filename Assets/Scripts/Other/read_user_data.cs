@@ -36,6 +36,8 @@ public class read_user_data : MonoBehaviour
     }
 
     private IEnumerator build_buildings (JObject user_data) {
+        
+        string user_save_data = Application.persistentDataPath + "/user_data.json";
 
         //Loop until we have centered the map. 
         while (true) {
@@ -53,14 +55,62 @@ public class read_user_data : MonoBehaviour
                     string building_type = (string)user_data["building_obj"][j]["building_type"];
                     float latitude = (float)user_data["building_obj"][j]["latitude"];
                     float longitude = (float)user_data["building_obj"][j]["longitude"];
-                         
+                    int storage = (int)user_data["building_obj"][j]["storage"];
+                    System.DateTime last_time = (System.DateTime)user_data["building_obj"][j]["date"];
+                     
                     Vector3 centre = map_reader.centre;
                     
                     float z = (float) (mercator_projection.latToY(latitude) - centre.z);
                     float x = (float) (mercator_projection.lonToX(longitude) - centre.x);
 
-                    Instantiate(GameObject.Find(building_type), new Vector3(x,0.3f,z), transform.rotation);
-                        
+                    
+                    //Debug.Log("Lat:" +  latitude);
+                    //Debug.Log("Long:" +  longitude);
+                    //Debug.Log("Centre" + centre);
+                    //Debug.Log("z-Lat:" + z);
+                    //Debug.Log("x-Long" + x);
+
+                    //The first time the data is switched, cities are wack, but from the second time on they work normal...
+
+                    GameObject inst = Instantiate(GameObject.Find(building_type), new Vector3(x,0.3f,z), transform.rotation);
+
+                    //Update Local Building Times
+                    System.DateTime current_time = System.DateTime.Now;
+                    double subtracted_time = (current_time.Subtract(last_time).TotalMinutes * 60); //Extra 60 to convert to mins.
+                    inst.GetComponent<resource_generation>().elapsed_time = subtracted_time;
+                    inst.GetComponent<resource_generation>().current_resource += storage;
+                    inst.GetComponent<resource_generation>().building_id = j;
+
+                    //Update System Building Times
+                    double max_time = inst.GetComponent<resource_generation>().max_time;
+
+                    //Debug.Log("Subtracted Time: " + subtracted_time);
+                    //Debug.Log("Max Time: " + max_time);
+    
+
+                    if(subtracted_time > 0) {
+                        while (subtracted_time > max_time) 
+                        {
+                            subtracted_time -= max_time; 
+                        }
+                    }
+
+                    subtracted_time = ((subtracted_time * -1));
+                    //Debug.Log("Subtracted Time: " + subtracted_time);
+
+                    System.DateTime updated_time = current_time;
+                    //Debug.Log("Current Time: " + updated_time);
+
+                    updated_time = updated_time.AddSeconds(subtracted_time);
+
+                    //Debug.Log("Updated Time: " + updated_time);
+
+                    //Update Time: 
+                    user_data["building_obj"][j]["date"] = updated_time;
+
+                    string account_string = user_data.ToString();
+                    System.IO.File.WriteAllText(user_save_data, account_string);
+
                 };
 
                 //Kill IEnumerator once buildings are placed.

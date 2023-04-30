@@ -24,9 +24,13 @@ public class collect_resources : MonoBehaviour
 
     public TextMeshProUGUI  gear_ui;
     static public int gears_stored;
-    
+    private AudioSource source;
 
+    public GameObject enemy_template;
 
+    void Start() {
+        source = GetComponent<AudioSource>();
+    }
 
 
     void Update() {
@@ -62,39 +66,51 @@ public class collect_resources : MonoBehaviour
         Collider[] hitColliders = Physics.OverlapSphere(center, sphere_radius);
         foreach (var hitCollider in hitColliders)
         {
-            resource_generation cs = hitCollider.gameObject.GetComponent<resource_generation>();
-            if (cs.current_resource > 0)
-            {
-                switch (cs.resource_type)
+            
+            if (hitCollider.gameObject != enemy_template) {
+
+            
+                resource_generation cs = hitCollider.gameObject.GetComponent<resource_generation>();
+                if (cs.current_resource > 0)
                 {
-                    case "pawn":
-                        pawns_stored += 1;
-                        cs.current_resource -= 1;
-                        var a = (int)data_file["pawns"];
-                        a = a += 1;
-                        data_file["pawns"] = a;
-                        break;    
-                    case "food":
-                        food_stored += 1;
-                        cs.current_resource -= 1;
-                        var b = (int)data_file["food"];
-                        b = b += 1;
-                        data_file["food"] = b;
-                        break;   
-                    case "coal":
-                        coal_stored += 1;
-                        cs.current_resource -= 1;
-                        var c = (int)data_file["coal"];
-                        c = c += 1;
-                        data_file["coal"] = c;
-                        break;
-                    case "gears":
-                        gears_stored += 1;
-                        cs.current_resource -= 1;
-                        var d = (int)data_file["gears"];
-                        d = d += 1;
-                        data_file["gears"] = d;
-                        break;   
+                    switch (cs.resource_type)
+                    {
+                        case "pawn":
+                            pawns_stored += 1;
+                            cs.current_resource -= 1;
+                            var a = (int)data_file["pawns"];
+                            a = a += 1;
+                            data_file["pawns"] = a;
+                            source.Play();
+                            break;    
+                        case "food":
+                            food_stored += 1;
+                            cs.current_resource -= 1;
+                            var b = (int)data_file["food"];
+                            b = b += 1;
+                            data_file["food"] = b;
+                            source.Play();
+                            break;   
+                        case "coal":
+                            coal_stored += 1;
+                            cs.current_resource -= 1;
+                            var c = (int)data_file["coal"];
+                            c = c += 1;
+                            data_file["coal"] = c;
+                            source.Play();
+                            break;
+                        case "gears":
+                            gears_stored += 1;
+                            cs.current_resource -= 1;
+                            var d = (int)data_file["gears"];
+                            d = d += 1;
+                            data_file["gears"] = d;
+                            source.Play();
+                            break;   
+                        default:
+                        
+                            break;
+                    }
                 }
             }
         }

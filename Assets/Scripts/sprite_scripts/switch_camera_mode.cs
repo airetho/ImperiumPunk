@@ -6,10 +6,20 @@ using UnityEngine.UI;
 public class switch_camera_mode : MonoBehaviour
 {
     public Transform main_camera;
+    private AudioSource source;
+    public static int achievement_camera = 0;
+    
+
+    void Start() {
+        source = GetComponent<AudioSource>();
+    }
 
     // Start is called before the first frame update
     public void switching_camera_mode()
     {
+
+        source.Play();
+        achievement_camera += 1;
         if (camera_movement.camera_state == "low")
         {
             camera_movement.camera_state = "high";

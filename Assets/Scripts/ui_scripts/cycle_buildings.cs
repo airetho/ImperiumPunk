@@ -1,39 +1,53 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+
+using System.IO; //Used for File Management
+using Newtonsoft.Json.Linq;
 
 public class cycle_buildings : MonoBehaviour
 {
 
-    public GameObject[] blueprint_array;
-    static public int current_blueprint_num = 0;
+    public GameObject[] canvas_array;
+    static public int current_canvas_num = 0;
+
+    
 
     // Start is called before the first frame update
     public void left_cycle()
     {
-        if (current_blueprint_num > 0) {
+        if (current_canvas_num > 0) {
 
             //De-activate current blueprint
-            blueprint_array[current_blueprint_num].SetActive(false);
+            canvas_array[current_canvas_num].SetActive(false);
+            
 
             //Activate new blueprint
-            cycle_buildings.current_blueprint_num -= 1;
+            cycle_buildings.current_canvas_num -= 1;
             
-            blueprint_array[current_blueprint_num].SetActive(true);
+            canvas_array[current_canvas_num].SetActive(true);
 
         }
     }
 
     public void right_cycle()
     {
-        if (current_blueprint_num < 3) {
+    
+        //Debug.Log("Building Checked!");
+        //Used to keep the player from building "buildings" out of order.
+        string user_save_data = Application.persistentDataPath + "/user_data.json";
+        string user_data_string = File.ReadAllText(user_save_data);
+        JObject data_file = JObject.Parse(user_data_string);
 
-            //De-activate current blueprint
-            blueprint_array[current_blueprint_num].SetActive(false);
+        int level = (int)data_file["user_level"];
+            
+        //Add Level
+        if (current_canvas_num < 4 && ((current_canvas_num + 1 ) < level) )   {
+                
+            //De-activate current canvas
+            canvas_array[current_canvas_num].SetActive(false);
 
-            //Activate new blueprint
-            cycle_buildings.current_blueprint_num += 1;
-            blueprint_array[current_blueprint_num].SetActive(true);
+            //Activate new canvas
+            cycle_buildings.current_canvas_num += 1;
+            canvas_array[current_canvas_num].SetActive(true);
             
         }
     }

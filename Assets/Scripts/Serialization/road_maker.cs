@@ -4,7 +4,6 @@ using System.Collections.Generic;
 
 class road_maker : infrastructure_behaviour
 {
-
     public static bool roads_built = false;
 
     public Material road_material;
@@ -55,7 +54,8 @@ class road_maker : infrastructure_behaviour
 
                 var cross = Vector3.Cross(diff, Vector3.up) * 2.0f; //2 Meters = Width of Lane
 
-//these values, representing the "further" side of the road, should get overwritten, ignored if i=1, or used if i=1 is the only i.
+                //these values, representing the "further" side of the road, should get overwritten, 
+                //ignored if i=1, or used if i=1 is the only i.
                 Vector3 v1 = s2 + cross;
                 Vector3 v2 = s2 - cross;
                 if (i == 1) //nothing to draw yet, since we don't know the right endpoints

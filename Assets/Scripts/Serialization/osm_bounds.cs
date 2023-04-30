@@ -10,7 +10,6 @@ class osm_bounds : base_osm
     public float min_lat { get; private set; }
     public float max_lat { get; private set; }
 
-
     public float min_lon { get; private set; }
     public float max_lon { get; private set; }
     

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class player_location : MonoBehaviour
 {
 
@@ -20,21 +21,31 @@ public class player_location : MonoBehaviour
 
         if (gps_off == false) {
             InvokeRepeating("UpdateLocation", 1.0f, 1.0f);
-        }
-          
+        } 
     }
+
 
     void UpdateLocation()
     {
         Vector3 centre = map_reader.centre;
         
         
-        //(-9932481.00, 0.00, 4512401.00) <- #If centre is undefined. --- Debug.Log("centre: " + centre); --- Debug.Log("coords = " + x + ", " + y);
 
-        float z = (float) (mercator_projection.latToY(Input.location.lastData.latitude) - centre.z);
-        float x = (float) (mercator_projection.lonToX(Input.location.lastData.longitude) - centre.x);
+
+        if (centre != Vector3.zero) 
+        {
+            //(-9932481.00, 0.00, 4512401.00) <- #If centre is undefined. --- Debug.Log("centre: " + centre); --- Debug.Log("coords = " + x + ", " + y);
+
+            float z = (float) (mercator_projection.latToY(Input.location.lastData.latitude) - centre.z);
+            float x = (float) (mercator_projection.lonToX(Input.location.lastData.longitude) - centre.x);
+            
+            
+            transform.position = new Vector3(x,0.3f,z);
+            //Debug.Log("coords = " + x + ", " + z);
+        }
+
+        //Debug.Log("Centre: " + centre);
         
         
-        transform.position = new Vector3(x,0.3f,z);
     }
 }

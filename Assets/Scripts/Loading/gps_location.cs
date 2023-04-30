@@ -18,8 +18,15 @@ public class gps_location : MonoBehaviour
     //Call GPS Connection Coroutine
     void Start()
     {
-        log.text = "Project Runtime";
-        StartCoroutine(gps_loc());
+        if (Input.location.status != LocationServiceStatus.Running)  {
+            log.text = "Project Runtime";
+            StartCoroutine(gps_loc());
+        } else {
+            //Send Data to be Downloaded.
+            local_map_data local_map_data = gameObject.GetComponent<local_map_data>();
+            local_map_data.DataDownload(Input.location.lastData.latitude, Input.location.lastData.longitude);
+        }
+        
     }
 
     //Attempts to connect to the GPS.
@@ -99,12 +106,10 @@ public class gps_location : MonoBehaviour
                 
                 //Send Data to be Downloaded.
                 local_map_data local_map_data = gameObject.GetComponent<local_map_data>();
+
                 local_map_data.DataDownload(Input.location.lastData.latitude, Input.location.lastData.longitude);
                 
-                /* --- TODO: Check if this method repeats ad-infinitum. --- */
-                
-                //This method continues to repeat? 
-                //Input.location.Stop();
+                //Function repeats until 
 
             } 
             else //Service is Stopped 

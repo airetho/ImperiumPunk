@@ -56,7 +56,6 @@ class osm_way : base_osm
                     height = 3.0f * GetAttribute<float>("v", t.Attributes);
                     break;
                 case "height":
-                    
                     break;
                 case "buildings":
                     is_building = GetAttribute<string>("v",t.Attributes) == "yes";
@@ -64,8 +63,6 @@ class osm_way : base_osm
                 case "highway":
                     is_road = true;
                     break;
-                
-                
             }
         } 
     }

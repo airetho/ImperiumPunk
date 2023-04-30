@@ -11,7 +11,6 @@ class building_maker : infrastructure_behaviour
 
     IEnumerator Start()
     {
-    
         while (!map.is_ready) 
         {
             yield return null;
@@ -95,8 +94,6 @@ class building_maker : infrastructure_behaviour
 
             yield return null;
         }
-
-
         
         //Finished Buildings
         buildings_built = true;

@@ -19,6 +19,13 @@ public class loading_fade : MonoBehaviour
     //Loading Bar
     public void Update() {
         
+        loading_bar_fill.fillAmount += 0.005f;
+
+        if (loading_bar_fill.fillAmount >= 1f) {
+            var canvas_group = GetComponent<CanvasGroup>();
+            StartCoroutine(do_fade(canvas_group, canvas_group.alpha, 0));
+        }
+        /*
         if (building_maker.buildings_built == true && loading_bar_fill.fillAmount < 0.9f){
             
             loading_bar_fill.fillAmount += 0.0025f;
@@ -33,6 +40,7 @@ public class loading_fade : MonoBehaviour
             var canvas_group = GetComponent<CanvasGroup>();
             StartCoroutine(do_fade(canvas_group, canvas_group.alpha, 0));
         }
+        */
 
     }
 
